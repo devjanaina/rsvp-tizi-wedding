@@ -1,0 +1,83 @@
+.countdown-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.days-splitter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5.5%;
+  margin-right: 3rem;
+}
+
+.divider {
+  font-family: "Begika";
+  display: flex;
+  align-self: center;
+  text-align: center;
+  color: #9f5b4c;
+  font-size: 2rem;
+  letter-spacing: 0.5rem;
+  padding: 0.5rem;
+  margin-top: -1.5rem;
+}
+
+.countdown-time {
+  font-family: "Begika";
+  text-align: center;
+  color: #9f5b4c;
+  font-size: 4rem;
+  letter-spacing: 0.5rem;
+  margin: 0;
+  padding: 1rem;
+}
+
+.countdown-text {
+  font-family: "Nunito", sans-serif;
+  text-align: center;
+  color: #9f5b4c;
+  margin-top: -0.5rem;
+  margin-left: -0.2rem;
+}
+
+/* when the device is a desktop */
+@media (min-width: 1024px) {
+  .countdown-wrapper {
+    width: 70%;
+  }
+
+  .countdown-time {
+    width: 8rem;
+  }
+}
+
+/* when the device is a tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .countdown-wrapper {
+    width: 60%;
+  }
+
+  .countdown-time {
+    width: 5rem;
+    font-size: 2rem;
+  }
+}
+
+/* when the device is a mobile */
+@media (max-width: 767px) {
+  .countdown-time {
+    width: 5rem;
+    font-size: 2rem;
+  }
+}
+

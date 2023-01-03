@@ -1,0 +1,204 @@
+@-webkit-keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes tracking-in-expand {
+  0% {
+    letter-spacing: -0.5em;
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.mid-page-container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f2e7;
+  background-clip: content-box;
+  background: url("./Assets/corner.png") left 0 bottom 50% no-repeat fixed;
+  min-width: fit-content;  
+}
+.mid-page-wrapper{
+  padding: 1rem;
+}
+
+.countdown-box {
+  position: absolute;
+  display: flex;
+  align-items: right;
+  justify-content: right;
+  right: 0;
+}
+
+.content-box {
+  position: relative;
+  width: 50%;
+  left: 35%;
+}
+
+.header-text {
+  font-family: "Begika";
+  text-align: left;
+  color: #9f5b4c;
+  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
+    both;
+  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+.subheader-text-location,
+.subheader-text-date {
+  font-family: "Nunito", sans-serif;
+  text-align: left;
+  font-weight: 300;
+  color: #9f5b4c;
+  -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
+    both;
+  animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+/* when the device is a desktop */
+@media (min-width: 1024px) {
+  .mid-page-container {
+    background-size: 25%;
+  }
+
+  .countdown-box {
+    width: 100%;
+    position: relative;
+    margin: 0;
+    padding: 3rem 0 3rem 0;
+  }
+
+  .content-box {
+    padding-top: 3rem;
+  }
+
+  .header-text {
+    font-size: 5.5rem;
+    line-height: 6.5rem;
+    padding-bottom: 2rem;
+    width: 100%;
+  }
+
+  .date-text,
+  .location-name {
+    font-size: 1.5rem;
+    padding-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .date-time,
+  .location-address {
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* when the device is a tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .mid-page-container {
+    background-size: 25%;
+  }
+
+  .countdown-box {
+    position: relative;
+    width: 60%;
+    margin: 0;
+    padding: 4rem;
+  }
+
+  .content-box {
+    padding: 0 1rem;
+    width: 60%;
+    left: 30%;
+    padding-top: 4rem;
+  }
+
+  .header-text {
+    font-size: 5rem;
+    line-height: 5.5rem;
+    padding-bottom: 0.7rem;
+  }
+
+  .subheader-text-location,
+  .subheader-text-date {
+    width: 100%;
+  }
+
+  .date-text,
+  .location-name {
+    font-size: 1.2rem;
+    padding-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .date-time,
+  .location-address {
+    font-size: 1rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* when the device is a mobile phone */
+@media (max-width: 767px ) {
+  .mid-page-container {
+    background: url("./Assets/bottom.png") left 50% bottom 0 no-repeat fixed;
+    background-size: 60%;
+    display: flex;
+  }
+
+  .mid-page-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+  }
+
+  .countdown-box {
+    position: relative;
+    padding-bottom: 2rem;
+    left: 10%;
+    top: 10%;
+  }
+
+  .content-box {
+    align-items: center;
+    padding: 0 1rem;
+    width: 100%;
+    left: 10%;
+    top:15%;
+    padding-top: 2rem;
+  }
+
+  .header-text {
+    font-size: 4rem;
+    line-height: 4rem;
+    padding-bottom: 1.3rem;
+  }
+
+  .date-text,
+  .location-name {
+    font-size: 1.2rem;
+    padding-bottom: 0.3rem;
+    font-weight: 500;
+  }
+
+  .date-time,
+  .location-address {
+    font-size: 1rem;
+    padding-bottom: 0.3rem;
+  }
+}
