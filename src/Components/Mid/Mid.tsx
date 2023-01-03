@@ -22,10 +22,10 @@ export function Mid() {
             item
             direction="row"
             justifyContent="flex-start"
-            spacing={2}
+            spacing={0}
             alignItems="flex-start"
           >
-            <Grid item sm={6} md={6} lg={6}>
+            <Grid item sm={12} md={5} lg={5}>
               <h2 className={styles["subheader-text-date"]}>
                 <span className={styles["date-text"]}>
                   Data: 16 de julho de 2023
@@ -34,7 +34,7 @@ export function Mid() {
                 <span className={styles["date-time"]}>Hora: 9h</span>
               </h2>
             </Grid>
-            <Grid item sm={6} md={6} lg={6}>
+            <Grid item sm={12} md={6} lg={6}>
               <h2 className={styles["subheader-text-location"]}>
                 <span className={styles["location-name"]}>
                   Quinta dos Querubins

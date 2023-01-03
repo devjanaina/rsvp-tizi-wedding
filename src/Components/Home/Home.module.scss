@@ -31,6 +31,8 @@
     url("./Assets/corner\ 4.png") right 0 bottom 0 no-repeat fixed;
   background-color: #f6f2e7;
   background-clip: content-box;
+  background-size: 30%;
+  min-width: fit-content;
   height: 100vh;
   width: auto;
   margin: 0;
@@ -44,11 +46,16 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  min-width: fit-content;
+  top: 30%;
 }
 
 .names-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
   font-family: "Begika";
+  font-size: 8vw;
   text-align: center;
   color: #9f5b4c;
   -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
@@ -61,6 +68,8 @@
   border-radius: 50px;
   background-color: transparent;
   border: 0.2rem solid #9f5b4c;
+  font-size: 2vw;
+  padding: 1vh 1.5vw;
   color: #9f5b4c;
   position: relative;
   transition: 655ms;
@@ -78,75 +87,18 @@
   transition: 655ms;
 }
 
-/* when the device is a desktop */
-@media (min-width: 1024px) {
-  .page-wrapper {
-    background-size: 30%;
-  }
-
-  .content-wrapper {
-    top: 30%;
-  }
-
-  .names-header {
-    font-size: 7rem;
-    line-height: 7.5rem;
-    letter-spacing: 0.5rem;
-    margin-bottom: 2rem;
-  }
-
-  .confirmation {
-    font-size: 1.5rem;
-    padding: 0.75rem 1.5rem;
-  }
-}
-
-/* when the device is a tablet */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .page-wrapper {
-    background-size: 40%;
-  }
-
-  .content-wrapper {
-    top: 30%;
-    padding: 0 2rem;
-  }
-
-  .names-header {
-    font-size: 5.5rem;
-    line-height: 4.5rem;
-    letter-spacing: 0.2rem;
-    margin-bottom: 2rem;
-  }
-
-  .confirmation {
-    border: 0.25rem solid #9f5b4c;
-    font-size: 1.5rem;
-    padding: 0.7rem 1rem;
-  }
-}
-
 /* when the device is a mobile */
 @media (max-width: 767px) {
   .page-wrapper {
     background-size: 50%;
   }
 
-  .content-wrapper {
-    top: 30%;
-    padding: 0 2rem;
-  }
-
   .names-header {
-    font-size: 4.5rem;
-    line-height: 4rem;
-    letter-spacing: 0.2rem;
-    margin-bottom: 2rem;
+    font-size: 12vw;
   }
 
   .confirmation {
-    border: 0.25rem solid #9f5b4c;
-    font-size: 1.3rem;
-    padding: 0.7rem 1rem;
+    font-size: 4vw;
+    padding: 1vh 2vw;
   }
 }

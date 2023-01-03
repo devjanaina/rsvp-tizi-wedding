@@ -29,30 +29,33 @@
   background-color: #f6f2e7;
   background-clip: content-box;
   background: url("./Assets/corner.png") left 0 bottom 50% no-repeat fixed;
-  min-width: fit-content;  
+  min-width: fit-content;
 }
-.mid-page-wrapper{
-  padding: 1rem;
+.mid-page-wrapper {
+  position: relative;
+  align-content: center;
+  justify-content: center;
 }
 
 .countdown-box {
   position: absolute;
-  display: flex;
-  align-items: right;
   justify-content: right;
-  right: 0;
+  display: flex;
 }
 
 .content-box {
   position: relative;
+  justify-content: center;
   width: 50%;
-  left: 35%;
 }
 
 .header-text {
   font-family: "Begika";
   text-align: left;
   color: #9f5b4c;
+  font-size: 6.5vw;
+  letter-spacing: 0.5vw;
+  line-height: 7vw;
   -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
     both;
   animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) both;
@@ -63,6 +66,9 @@
   font-family: "Nunito", sans-serif;
   text-align: left;
   font-weight: 300;
+  font-size: 1.5vw;
+  line-height: 2vw;
+  padding: 3vh 0 0 0;
   color: #9f5b4c;
   -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.61, 0.355, 1)
     both;
@@ -75,35 +81,15 @@
     background-size: 25%;
   }
 
+  .content-box {
+    left: 35%;
+  }
+
   .countdown-box {
     width: 100%;
     position: relative;
     margin: 0;
-    padding: 3rem 0 3rem 0;
-  }
-
-  .content-box {
-    padding-top: 3rem;
-  }
-
-  .header-text {
-    font-size: 5.5rem;
-    line-height: 6.5rem;
-    padding-bottom: 2rem;
-    width: 100%;
-  }
-
-  .date-text,
-  .location-name {
-    font-size: 1.5rem;
-    padding-bottom: 0.5rem;
-    font-weight: 500;
-  }
-
-  .date-time,
-  .location-address {
-    font-size: 1.2rem;
-    padding-bottom: 0.5rem;
+    padding: 4rem;
   }
 }
 
@@ -111,94 +97,96 @@
 @media (min-width: 768px) and (max-width: 1023px) {
   .mid-page-container {
     background-size: 25%;
+    width: fit-content;
+  }
+
+  .mid-page-wrapper {
+    position: relative;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
   }
 
   .countdown-box {
+    width: 100%;
     position: relative;
-    width: 60%;
     margin: 0;
-    padding: 4rem;
+    padding: 4rem 0 0 0;
   }
 
   .content-box {
-    padding: 0 1rem;
-    width: 60%;
-    left: 30%;
-    padding-top: 4rem;
+    position: relative;
+    top: 40%;
+    height: auto;
+    width: 70%;
+    padding-top: 6rem;
+    left: 35%;
   }
 
   .header-text {
-    font-size: 5rem;
-    line-height: 5.5rem;
-    padding-bottom: 0.7rem;
+    font-size: 8vw;
+    letter-spacing: 0.5vw;
+    line-height: 9vw;
   }
 
   .subheader-text-location,
   .subheader-text-date {
-    width: 100%;
-  }
-
-  .date-text,
-  .location-name {
-    font-size: 1.2rem;
-    padding-bottom: 0.5rem;
-    font-weight: 500;
-  }
-
-  .date-time,
-  .location-address {
-    font-size: 1rem;
-    padding-bottom: 0.5rem;
+    font-size: 2vw;
+    line-height: 3vw;
   }
 }
 
 /* when the device is a mobile phone */
-@media (max-width: 767px ) {
+@media (max-width: 767px) {
   .mid-page-container {
     background: url("./Assets/bottom.png") left 50% bottom 0 no-repeat fixed;
     background-size: 60%;
     display: flex;
+    justify-content: center;
+    
   }
 
   .mid-page-wrapper {
+    width: 100%;
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    width: 80%;
+    justify-content: center;
   }
 
   .countdown-box {
-    position: relative;
-    padding-bottom: 2rem;
-    left: 10%;
-    top: 10%;
+    margin: 0;
+    top: 0;
+    right: none;
+    padding: 5vh 0 0 0;
+    
   }
 
   .content-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 0 1rem;
-    width: 100%;
-    left: 10%;
-    top:15%;
-    padding-top: 2rem;
+    width: 70%;
   }
 
   .header-text {
-    font-size: 4rem;
-    line-height: 4rem;
-    padding-bottom: 1.3rem;
+    font-size: 11vw;
+    letter-spacing: 0.5vw;
+    line-height: 12vw;
+    padding-bottom: 1vh;
   }
 
-  .date-text,
-  .location-name {
-    font-size: 1.2rem;
-    padding-bottom: 0.3rem;
-    font-weight: 500;
+  .subheader-text-date,
+  .subheader-text-location {
+    font-size: 4vw;
+    line-height: 5vw;
+   
   }
 
-  .date-time,
-  .location-address {
-    font-size: 1rem;
-    padding-bottom: 0.3rem;
+  .subheader-text-location {
+    width: 90%;
   }
 }
