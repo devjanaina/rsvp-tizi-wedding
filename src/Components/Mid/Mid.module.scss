@@ -26,9 +26,9 @@
 .mid-page-container {
   width: 100vw;
   height: 100vh;
+  background: url("./Assets/corner.png") left 0 bottom 50% no-repeat fixed;
   background-color: #f6f2e7;
   background-clip: content-box;
-  background: url("./Assets/corner.png") left 0 bottom 50% no-repeat fixed;
   min-width: fit-content;
 }
 .mid-page-wrapper {
@@ -92,7 +92,7 @@
     width: 100%;
     position: relative;
     margin: 0;
-    padding: 4rem;
+    padding: 2vw 4vw;
     justify-content: right;
   }
 }
@@ -101,8 +101,8 @@
 @media (min-width: 768px) and (max-width: 1023px) {
   .mid-page-container {
     background-size: 20%;
-    width: fit-content;
     height: 100vh;
+    width: fit-content;
     display: flex;
     justify-content: center;
   }
@@ -154,6 +154,7 @@
 @media (max-width: 767px) {
   .mid-page-container {
     background: url("./Assets/bottom.png") left 50% bottom 0 no-repeat fixed;
+    background-color: #f6f2e7;
     background-size: 60%;
     display: flex;
     justify-content: center;
