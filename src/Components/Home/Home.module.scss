@@ -46,7 +46,7 @@
   align-items: center;
   display: flex;
   flex-direction: column;
-  top: 30%;
+  top: 25%;
 }
 
 .names-header {
@@ -57,6 +57,7 @@
   font-family: "Begika";
   font-size: 8vw;
   text-align: center;
+  padding: 0 0 3vh 0;
   color: #9f5b4c;
   -webkit-animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 	        animation: tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
@@ -64,10 +65,10 @@
 
 .confirmation {
   font-family: "Nunito";
-  font-weight: 900;
+  font-weight: bolder;
   border-radius: 50px;
   background-color: transparent;
-  border: 0.2rem solid #9f5b4c;
+  border: 0.5vh solid #9f5b4c;
   font-size: 2vw;
   padding: 1vh 1.5vw;
   color: #9f5b4c;
@@ -93,8 +94,12 @@
     background-size: 50%;
   }
 
+  .content-wrapper {
+    top: 35%;
+  }
+
   .names-header {
-    font-size: 12vw;
+    font-size: 15vw;
   }
 
   .confirmation {

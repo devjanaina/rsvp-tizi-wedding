@@ -2,33 +2,33 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0;
-  padding: 0;
+  margin: 3vw 2vw 3vw 2vw;
 }
 
 .countdown-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 8vw;
 }
 
 .days-splitter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 5.5%;
-  margin-right: 3vw;
+  margin-right: 5vw;
 }
 
 .divider {
   font-family: "Begika";
   display: flex;
-  align-self: center;
+  align-items: center;
   text-align: center;
   color: #9f5b4c;
   font-size: 2vw;
   letter-spacing: 0.5vw;
-  padding: 0.5vw;
+  padding: 0.5vw 1vw;
   margin-top: -1.5vw;
 }
 
@@ -50,8 +50,49 @@
   margin-left: -0.2vw;
 }
 
+/* when the device is a tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 10vw;
+  }
+
+  .divider {
+    font-size: 3vw;
+    letter-spacing: 0.5vw;
+    padding: 0.5vw 1vw;
+    margin-top: -1.5vw;
+  }
+
+  .countdown-time {
+    font-size: 5vw;
+    letter-spacing: 0.5vw;
+    margin: 0;
+    padding: 1vw;
+  }
+
+  .countdown-text {
+    font-family: "Nunito", sans-serif;
+    text-align: center;
+    color: #9f5b4c;
+    font-size: 2vw;
+    margin-top: -0.5vw;
+    margin-left: -0.2vw;
+  }
+}
+
 /* when the device is a mobile phone */
 @media (max-width: 767px) {
+
+  .countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 13vw;
+  }
 
   .divider {
     font-size: 4vw;
@@ -61,7 +102,7 @@
   }
 
   .countdown-time {
-    font-size: 8vw;
+    font-size: 7vw;
     letter-spacing: 1vw;
     margin: 0;
     padding: 1vw;
@@ -71,6 +112,7 @@
     font-family: "Nunito", sans-serif;
     text-align: center;
     color: #9f5b4c;
+    font-size: 2.5vw;
     margin-top: -1vw;
     margin-left: -0.4vw;
   }
