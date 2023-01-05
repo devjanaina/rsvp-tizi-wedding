@@ -1,28 +1,97 @@
-import { FormControlLabel, MenuItem } from "@mui/material";
+import { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import Grid from "@mui/material/Grid";
-import Switch from "@mui/material/Switch";
-import TextField from "@mui/material/TextField";
+import Form from "./Form/Form";
 import styles from "./RSVP.module.scss";
-import { useState } from "react";
+import { IconButton, Switch } from "@mui/material";
+import { AddCircleOutline, RemoveCircleOutline } from "@mui/icons-material";
+import Tooltip from "@mui/material/Tooltip";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 export function RSVP() {
-  const idade = [
+  const [formValues, setFormValues] = useState({
+    name: "",
+    email: "",
+    age: "",
+    confirmedFamily: Boolean,
+  });
+
+  const convertAge = (age: string) => {
+    const ageNumber = Number(age);
+
+    if (ageNumber < 13) {
+      return "Criança";
+    } else if (ageNumber >= 13 && ageNumber < 18) {
+      return "Adolescente";
+    } else if (ageNumber >= 18 && ageNumber < 60) {
+      return "Adulto";
+    } else if (ageNumber >= 60) {
+      return "Idoso";
+    }
+
+    return age;
+  };
+
+  const inputs = [
     {
-      value: "adulto",
-      label: "Adulto",
+      id: 1,
+      label: "Nome",
+      type: "text",
+      required: true,
+      value: formValues.name,
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFormValues({ ...formValues, name: event.target.value });
+      },
     },
     {
-      value: "crianca",
-      label: "Criança",
-    }
-  ]
+      id: 2,
+      label: "Email",
+      type: "email",
+      required: true,
+      value: formValues.email,
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFormValues({ ...formValues, email: event.target.value });
+      },
+    },
+    {
+      id: 3,
+      label: "Idade",
+      type: "number",
+      required: true,
+      min: 0,
+      max: 100,
+      value: formValues.age,
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+        setFormValues({ ...formValues, age: event.target.value });
+      },
+    },
+  ];
 
-  const [confirmaFamilia, setConfirmarFamilia] = useState(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setConfirmarFamilia(event.target.checked);
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(formValues);
   };
+
+  const [familyConfirmed, setFamilyConfirmed] = useState(false);
+  const [newFamiliar, setNewFamiliar] = useState([
+    { name: formValues.name, age: formValues.age },
+  ]);
+
+  const addNewFamilyMember = () => {
+    setNewFamiliar([
+      ...newFamiliar,
+      { name: formValues.name, age: formValues.age },
+    ]);
+  };
+
+  const removeFamilyMember = (index: number) => {
+    if (index !== 0) {
+      const newFamiliarList = [...newFamiliar];
+      newFamiliarList.splice(index, 1);
+      setNewFamiliar(newFamiliarList);
+    }
+  };
+
   return (
     <div className={styles["RSVP-container"]}>
       <div className={styles["RSVP-wrapper"]}>
@@ -33,57 +102,143 @@ export function RSVP() {
           <p className={styles["subheader"]}>Com amor, Tiziana e Wagner</p>
         </div>
         <div className={styles["RSVP-form"]}>
-          <Grid>
-            <Grid container item xs={12}>
-              <FormControl fullWidth>
-                <TextField
-                  id="outlined-basic"
-                  label="Nome"
-                  variant="outlined"
-                  margin="dense"
-                />
-              </FormControl>
-            </Grid>
-
-            <Grid container>
-              <Grid item xs={7} sm={7}>
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
                 <FormControl fullWidth>
-                  <TextField
-                    id="outlined-basic"
-                    label="E-mail"
-                    type={"email"}
-                    variant="outlined"
-                    margin="dense"
+                  <Form
+                    key={inputs[0].id}
+                    label={inputs[0].label}
+                    type={inputs[0].type}
+                    id={inputs[0].id}
+                    required={inputs[0].required}
+                    value={inputs[0].value}
+                    onChange={inputs[0].onChange}
                   />
                 </FormControl>
               </Grid>
-              <Grid item xs={4} sm={4}>
+
+              <Grid item xs={8}>
                 <FormControl fullWidth>
-                  <TextField
-                    id="outlined-basic"
-                    label="Idade"
-                    select
-                    variant="outlined"
-                    margin="dense"
-                  >
-                    {idade.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
+                  <Form
+                    key={inputs[1].id}
+                    label={inputs[1].label}
+                    type={inputs[1].type}
+                    id={inputs[1].id}
+                    required={inputs[1].required}
+                    value={inputs[1].value}
+                    onChange={inputs[1].onChange}
+                  />
                 </FormControl>
               </Grid>
 
-              <Grid container>
-                <Grid item xs={6} sm={6}>
-                  <FormControlLabel control={<Switch />} label="Confirmar família?" labelPlacement="start"/>
-                </Grid>
+              <Grid item xs={4}>
+                <FormControl fullWidth>
+                  <Form
+                    key={inputs[2].id}
+                    label={inputs[2].label}
+                    type={inputs[2].type}
+                    id={inputs[2].id}
+                    required={inputs[2].required}
+                    min={inputs[2].min}
+                    max={inputs[2].max}
+                    value={convertAge(inputs[2].value)}
+                    onChange={inputs[2].onChange}
+                  />
+                </FormControl>
               </Grid>
-            </Grid>
 
-            <button>Enviar</button>
-          </Grid>
+              <Grid item xs={6}>
+                <FormControlLabel
+                  control={
+                    <Switch
+                      checked={familyConfirmed}
+                      onChange={() => setFamilyConfirmed(!familyConfirmed)}
+                    />
+                  }
+                  value={familyConfirmed ? "Sim" : "Não"}
+                  label="Confirmar Família?"
+                  labelPlacement="start"
+                />
+              </Grid>
+
+              {familyConfirmed && (
+                <Grid item xs={1}>
+                  <FormControl fullWidth>
+                    <Tooltip title="Adicionar familiar">
+                      <IconButton onClick={() => addNewFamilyMember()}>
+                        <AddCircleOutline />
+                      </IconButton>
+                    </Tooltip>
+                  </FormControl>
+                </Grid>
+              )}
+
+              {familyConfirmed && (
+                <Grid container spacing={2}>
+                  {newFamiliar.map((familiar, index) => (
+                    <span key={index}>
+                      <Grid item xs={7}>
+                        <FormControl fullWidth>
+                          <Form
+                            key={index}
+                            label="Nome"
+                            type="text"
+                            id={index}
+                            required={true}
+                            value={familiar.name}
+                            onChange={(
+                              event: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                              setFormValues({
+                                ...formValues,
+                                name: event.target.value,
+                              });
+                            }}
+                          />
+                        </FormControl>
+                      </Grid>
+
+                      <Grid item xs={4}>
+                        <FormControl fullWidth>
+                          <Form
+                            key={index}
+                            label="Idade"
+                            type="number"
+                            id={index}
+                            required={true}
+                            min={0}
+                            max={100}
+                            value={convertAge(familiar.age)}
+                            onChange={(
+                              event: React.ChangeEvent<HTMLInputElement>
+                            ) => {
+                              setFormValues({
+                                ...formValues,
+                                age: event.target.value,
+                              });
+                            }}
+                          />
+                        </FormControl>
+                      </Grid>
+
+                      <Grid item xs={1}>
+                        <FormControl fullWidth>
+                          <Tooltip title="Remover familiar">
+                            <IconButton
+                              onClick={() => removeFamilyMember(index)}
+                            >
+                              <RemoveCircleOutline />
+                            </IconButton>
+                          </Tooltip>
+                        </FormControl>
+                      </Grid>
+                    </span>
+                  ))}
+                </Grid>
+              )}
+            </Grid>
+          </form>
         </div>
       </div>
     </div>
