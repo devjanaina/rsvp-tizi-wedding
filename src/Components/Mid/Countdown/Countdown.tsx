@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import styles from "./Countdown.module.scss";
 
-export function Countdown() {
+export interface CountdownProps {
+  targetDate: Date;
+}
+
+export function Countdown({ targetDate }: CountdownProps) {
   const [timerDays, setTimerDays] = useState(0);
   const [timerHours, setTimerHours] = useState(0);
   const [timerMinutes, setTimerMinutes] = useState(0);
   const [timerSeconds, setTimerSeconds] = useState(0);
 
   useEffect(() => {
-    const target = new Date("2023-07-16T09:00:00");
+    const target = new Date(targetDate);
 
     const interval = setInterval(() => {
       const now = new Date();

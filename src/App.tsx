@@ -15,7 +15,7 @@ function App() {
       </section>
 
       <section>
-        <Mid />
+        <Mid weddingDate={new Date("2023-07-16T09:00:00")} />
       </section>
 
       <section>

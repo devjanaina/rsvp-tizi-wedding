@@ -6,13 +6,17 @@ export interface MidProps {
   weddingDate: Date;
 }
 
-export function Mid() {
+export function Mid({ weddingDate }: MidProps) {
+  const weddingTime = weddingDate.toLocaleTimeString();
+  const weddingDateString = weddingDate.toLocaleDateString();
+  const [locationName, locationAddress] = getWeddingLocation();
+
   return (
     <div className={styles["mid-page-container"]}>
       {/* Wrapper */}
       <div className={styles["mid-page-wrapper"]}>
         <div className={styles["countdown-box"]}>
-          <Countdown />
+          <Countdown targetDate={weddingDate} />
         </div>
         {/* Content Box */}
         <div className={styles["content-box"]}>
@@ -28,20 +32,20 @@ export function Mid() {
             <Grid item sm={12} md={12} lg={5}>
               <h2 className={styles["subheader-text-date"]}>
                 <span className={styles["date-text"]}>
-                  Data: 16 de julho de 2023
+                  Data: {weddingDateString}
                 </span>
                 <br />
-                <span className={styles["date-time"]}>Hora: 9h</span>
+                <span className={styles["date-time"]}>Hora: {weddingTime}</span>
               </h2>
             </Grid>
             <Grid item sm={12} md={12} lg={6}>
               <h2 className={styles["subheader-text-location"]}>
                 <span className={styles["location-name"]}>
-                  Quinta dos Querubins
+                  {locationName}
                 </span>
                 <br />
                 <span className={styles["location-address"]}>
-                  Chácaras Recreio São Joaquim, Goiânia
+                  {locationAddress}
                 </span>
               </h2>
             </Grid>
@@ -50,4 +54,9 @@ export function Mid() {
       </div>
     </div>
   );
+}
+
+function getWeddingLocation() {
+  // replace this with your own code to get the location name and address
+  return ["Quinta dos Querubins", "Chácaras Recreio São Joaquim, Goiânia"];
 }
