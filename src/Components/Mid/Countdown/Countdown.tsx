@@ -6,10 +6,12 @@ export interface CountdownProps {
 }
 
 export function Countdown({ targetDate }: CountdownProps) {
-  const [timerDays, setTimerDays] = useState(0);
-  const [timerHours, setTimerHours] = useState(0);
-  const [timerMinutes, setTimerMinutes] = useState(0);
-  const [timerSeconds, setTimerSeconds] = useState(0);
+  const [timer, setTimer] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
     const target = new Date(targetDate);
@@ -18,47 +20,45 @@ export function Countdown({ targetDate }: CountdownProps) {
       const now = new Date();
       const difference = target.getTime() - now.getTime();
 
-      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-      setTimerDays(days);
+      if (difference < 0) {
+        clearInterval(interval);
+        return;
+      }
 
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
       const hours = Math.floor(
         (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
       );
-      setTimerHours(hours);
-
       const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      setTimerMinutes(minutes);
-
       const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-      setTimerSeconds(seconds);
+
+      setTimer({ days, hours, minutes, seconds });
     }, 1000);
 
     return () => {
       clearInterval(interval);
     };
-  });
+  }, [targetDate]);
 
   return (
     <div className={styles["countdown-container"]}>
       <div className={styles["countdown-wrapper"]}>
         <div className={styles["countdown-item"]}>
-          <span className={styles['days-splitter']}>
-          <span className={styles["countdown-time"]}>{timerDays}</span>
+          <span className={styles["countdown-time"]}>{timer.days}</span>
           <span className={styles["countdown-text"]}>Dias</span>
-          </span>
-        </div> 
+        </div>
         <div className={styles["countdown-item"]}>
-          <span className={styles["countdown-time"]}>{timerHours}</span>
+          <span className={styles["countdown-time"]}>{timer.hours}</span>
           <span className={styles["countdown-text"]}>Horas</span>
         </div>
-        <span className={styles['divider']}>:</span>
+        <span className={styles["divider"]}>:</span>
         <div className={styles["countdown-item"]}>
-          <span className={styles["countdown-time"]}>{timerMinutes}</span>
+          <span className={styles["countdown-time"]}>{timer.minutes}</span>
           <span className={styles["countdown-text"]}>Minutos</span>
         </div>
-        <span className={styles['divider']}>:</span>
+        <span className={styles["divider"]}>:</span>
         <div className={styles["countdown-item"]}>
-          <span className={styles["countdown-time"]}>{timerSeconds}</span>
+          <span className={styles["countdown-time"]}>{timer.seconds}</span>
           <span className={styles["countdown-text"]}>Segundos</span>
         </div>
       </div>

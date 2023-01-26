@@ -78,7 +78,7 @@ export function RSVP() {
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Send formData to server or email here
+    // will put server data here
   };
 
   return (

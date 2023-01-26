@@ -57,6 +57,5 @@ export function Mid({ weddingDate }: MidProps) {
 }
 
 function getWeddingLocation() {
-  // replace this with your own code to get the location name and address
   return ["Quinta dos Querubins", "Chácaras Recreio São Joaquim, Goiânia"];
 }
