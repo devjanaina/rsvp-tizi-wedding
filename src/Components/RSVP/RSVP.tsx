@@ -1,6 +1,12 @@
-import { TextField, FormControlLabel, Checkbox, Button } from "@mui/material";
+import {
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Button,
+  FormControl,
+} from "@mui/material";
 import { AgeGroup } from "./Types";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./RSVP.module.scss";
 import Grid from "@mui/material/Grid";
 
@@ -26,7 +32,7 @@ const initialFormData: FormData = {
   email: "",
   age: 0,
   hasFamily: false,
-  familyMembers: []
+  familyMembers: [],
 };
 
 export function RSVP() {
@@ -54,31 +60,44 @@ export function RSVP() {
     };
 
   const removeFamilyMember = (index: number) => {
-    if (index === 0) {
-      return alert("Você não pode remover o unico familiar");
-    } else {
-      const updatedFamilyMembers = [...formData.familyMembers];
-      updatedFamilyMembers.splice(index, 1);
-      setFormData({ ...formData, familyMembers: updatedFamilyMembers });
-    }
+    const updatedFamilyMembers = [...formData.familyMembers];
+    updatedFamilyMembers.splice(index, 1);
+    setFormData({ ...formData, familyMembers: updatedFamilyMembers });
   };
 
   const handleAgeGroupChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const age = parseInt(event.target.value);
-    if (age < 13) {
+    setFormData({ ...formData, age });
+  };
+
+  useEffect(() => {
+    if (formData.age < 13) {
       setAgeGroup("criança");
-    } else if (age >= 13 && age < 18) {
+    } else if (formData.age >= 13 && formData.age < 18) {
       setAgeGroup("adolescente");
-    } else if (age >= 18 && age < 60) {
+    } else if (formData.age >= 18 && formData.age < 60) {
       setAgeGroup("adulto");
-    } else if (age >= 60) {
+    } else if (formData.age >= 60) {
       setAgeGroup("idoso");
     }
+  }, [formData.age]);
+
+  const handleAddFamilyMember = () => {
+    setFormData({
+      ...formData,
+      familyMembers: [...formData.familyMembers, { name: "", age: 0 }],
+    });
   };
 
   const handleFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // will put server data here
+    // Perform form validation here
+    if (!formData.name || !formData.email || !formData.age) {
+      alert("Please fill in all required fields");
+      return;
+    }
+    // Send data to server here
+    console.log(formData);
   };
 
   return (
@@ -92,33 +111,39 @@ export function RSVP() {
         </div>
         <div className={styles["RSVP-form"]}>
           <form onSubmit={handleFormSubmit}>
-            <Grid container spacing={2}>
-              <TextField
-                label="Nome"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                fullWidth
-                required
-              />
-              <TextField
-                label="E-mail"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                fullWidth
-                required
-              />
-              <TextField
-                type="number"
-                label="Idade"
-                name="age"
-                inputProps={{ min: 0, max: 100} }
-                value={formData.age}
-                onChange={handleAgeGroupChange}
-                fullWidth
-                required
-              />
+            <Grid container>
+              <FormControl fullWidth>
+                <TextField
+                  label="Nome"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                  fullWidth
+                  required
+                />
+              </FormControl>
+              <Grid item xs={8}>
+                <TextField
+                  label="E-mail"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  fullWidth
+                  required
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <TextField
+                  type="number"
+                  label="Idade"
+                  name="age"
+                  inputProps={{ min: 0, max: 100, maxLength: 3 }}
+                  value={formData.age}
+                  onChange={handleAgeGroupChange}
+                  fullWidth
+                  required
+                />
+              </Grid>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -126,60 +151,58 @@ export function RSVP() {
                     onChange={handleCheckboxChange}
                   />
                 }
-                label="Confirmar presença de familiares"
+                label="Tenho familiares que também vão comparecer"
               />
               {formData.hasFamily && (
-                <>
+                <FormControl fullWidth>
+                <Grid container>
                   {formData.familyMembers.map((member, index) => (
-                    <div key={index}>
-                      <TextField
-                        label={`Familiar ${index + 1}: Nome`}
-                        name="name"
-                        value={member.name}
-                        onChange={handleFamilyMemberChange(index)}
-                        fullWidth
-                        required
-                      />
-                      <TextField
-                        label={`Familiar ${index + 1}: Idade`}
-                        name="age"
-                        value={member.age}
-                        onChange={handleFamilyMemberChange(index)}
-                        fullWidth
-                        required
-                      />
+                    <div key={index} className={styles["family-member"]}>
+                      <Grid item xs={8}>
+                        <TextField
+                          label="Nome"
+                          name="name"
+                          value={member.name}
+                          onChange={handleFamilyMemberChange(index)}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item xs={4}>
+                        <TextField
+                          type="number"
+                          label="Idade"
+                          name="age"
+                          inputProps={{ min: 0, max: 100, maxLength: 3 }}
+                          value={member.age}
+                          onChange={handleFamilyMemberChange(index)}
+                          fullWidth
+                        />
+                      </Grid>
+                      <Tooltip title="Remover Membro da Família">
+                        <IconButton onClick={() => removeFamilyMember(index)}>
+                          <RemoveCircleOutline />
+                        </IconButton>
+                      </Tooltip>
                     </div>
                   ))}
-                  <Tooltip title="Adicionar familiar">
-                    <IconButton
-                      onClick={() =>
-                        setFormData({
-                          ...formData,
-                          familyMembers: [
-                            ...formData.familyMembers,
-                            { name: "", age: 0 },
-                          ],
-                        })
-                      }
-                    >
+                  <Tooltip title="Adicionar Membro da Família">
+                    <IconButton onClick={handleAddFamilyMember}>
                       <AddCircleOutline />
                     </IconButton>
                   </Tooltip>
-
-                  <Tooltip title="Remover familiar">
-                    <IconButton
-                      onClick={() =>
-                        removeFamilyMember(formData.familyMembers.length - 1)
-                      }
-                    >
-                      <RemoveCircleOutline />
-                    </IconButton>
-                  </Tooltip>
-                </>
+                </Grid>
+                </FormControl>
               )}
-              <Button type="submit" variant="contained" color="primary">
-                Submit
-              </Button>
+              <FormControl fullWidth>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  className={styles["RSVP-button"]}
+                >
+                  Enviar
+                </Button>
+              </FormControl>
             </Grid>
           </form>
         </div>
