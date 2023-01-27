@@ -6,12 +6,12 @@ export interface HomeProps {
 
 export function Home({ onClick }: HomeProps) {
   return (
-    <div className={styles["page-wrapper"]}>
+    <div className={styles["page-wrapper"]} aria-labelledby="home-header">
       <div className={styles["content-wrapper"]}>
-        <h1 className={styles["names-header"]}>
+        <h1 className={styles["names-header"]} id="home-header">
           Tiziana <br /> & Wagner
         </h1>
-        <button className={styles["confirmation"]} onClick={onClick}>CONFIRMAR PRESENÇA</button>
+        <button className={styles["confirmation"]} onClick={onClick} aria-label="Pular para a confirmação da presença">CONFIRMAR PRESENÇA</button>
       </div>
     </div>
   );
