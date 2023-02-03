@@ -1,61 +1,89 @@
-.RSVP-container
-{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
-    background-color: #f6f2e7;
+.RSVP-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f6f2e7;
 }
+
 .RSVP-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 90%;
-    height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  height: 100%;
 }
 
 .RSVP-text {
-    width: 45%;
-    height: auto;
-    padding: 0 10px;
-    color: #9f5b4c;
+  width: 45%;
+  height: auto;
+  padding: 0 5px;
+  color: #9f5b4c;
 }
 
 .main-text {
-    font-family: "Begika";
-    font-size: 5.5vw;
+  font-family: "Begika";
+  font-size: 5.5vw;
 }
 
 .subheader {
-    font-family: "Nunito";
-    font-size: 1.7vw;
+  font-family: "Nunito";
+  font-size: 1.7vw;
 }
 
 .RSVP-form {
-    width: 45%;
-    display: flex;
-    height: auto;
-    padding: 30px 30px;
-    border-radius: 10px;
-    height: fit-content;
-    background-color: #faf8f3;
+  width: 45%;
+  display: flex;
+  height: auto;
+  padding: 30px 30px;
+  border-radius: 10px;
+  height: fit-content;
+  background-color: #faf8f3;
 }
 
 .RSVP-button {
-    height: 50px;
-    border-radius: 10px;
-    border: none;
-    color: white;
-    font-family: "Nunito";
-    font-size: 1.5vw;
-    font-weight: 600;
-    cursor: pointer;
+  height: 50px;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-family: "Nunito";
+  font-size: 1.5vw;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .family-error-message {
-    text-align: left;
-    margin-top: 5px;
+  text-align: left;
+  margin-top: 5px;
+}
+
+/* when the device is a phone */
+@media (max-width: 767px) {
+  .RSVP-wrapper {
+    flex-direction: column;
+  }
+
+  .RSVP-text {
+    width: 90%;
+    margin-bottom: 20px;
+  }
+
+  .main-text {
+    font-size: 8vw;
+  }
+
+  .subheader {
+    font-size: 5vw;
+  }
+
+  .RSVP-form {
+    width: 90%;
+  }
+
+  .RSVP-button {
+    font-size: 5vw;
+  }
 }

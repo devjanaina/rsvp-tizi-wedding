@@ -7,7 +7,11 @@ export interface MidProps {
 }
 
 export function Mid({ weddingDate }: MidProps) {
-  const weddingTime = weddingDate.toLocaleTimeString();
+  const weddingTime = weddingDate.toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
   const weddingDateString = weddingDate.toLocaleDateString();
   const [locationName, locationAddress] = getWeddingLocation();
 

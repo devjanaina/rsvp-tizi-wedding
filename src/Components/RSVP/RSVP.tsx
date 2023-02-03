@@ -11,6 +11,7 @@ import {
   FormControl,
   FormHelperText,
   styled,
+  useMediaQuery,
 } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { IconButton } from "@mui/material";
@@ -63,6 +64,8 @@ export function RSVP() {
   const [ageGroup, setAgeGroup] = useState<AgeGroup>("criança");
   // Max family members error
   const [maxFamilyMembersError, setMaxFamilyMembersError] = useState(false);
+  // Device context
+  const isMobile = useMediaQuery('(max-width: 767px)');
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -215,7 +218,7 @@ export function RSVP() {
                 />
               </Grid>
               {/* Allows user add family members to confirm presence */}
-              <Grid item xs={11} marginLeft={-1}>
+              <Grid item xs={11} marginLeft={-1} marginTop={1} marginBottom={1}>
                 <FormControlLabel
                   labelPlacement="start"
                   control={
@@ -239,7 +242,7 @@ export function RSVP() {
                     {formData.familyMembers.map((member, index) => (
                       <div key={index} className={styles["family-member"]}>
                         <Grid container spacing={1} marginBottom={2}>
-                          <Grid item xs={7}>
+                          <Grid item xs={6}>
                             <FormField
                               label="Nome"
                               name="name"
@@ -250,7 +253,7 @@ export function RSVP() {
                               fullWidth
                             />
                           </Grid>
-                          <Grid item xs={3}>
+                          <Grid item xs={4}>
                             <FormField
                               type="number"
                               label="Idade"
@@ -307,7 +310,7 @@ export function RSVP() {
               )}
 
               {/* Submit button */}
-              <Grid item xs={12}>
+              <Grid item xs={12} marginTop={1}>
               <FormControl fullWidth>
                 <Button
                   type="submit"
@@ -315,7 +318,7 @@ export function RSVP() {
                   role="button"
                   aria-label="Enviar formulário"
                   className={styles["RSVP-button"]}
-                  sx={{ backgroundColor: "#F2C94C", color: "#fff", '&:hover': { backgroundColor: "#f50057"}, width: "60%", alignSelf: "center" }}
+                  sx={{ backgroundColor: "#F2C94C", color: "#fff", '&:hover': { backgroundColor: "#f50057"}, width: isMobile ? "100%" : "60%", alignSelf: "center" }}
                 >
                   Enviar
                 </Button>
